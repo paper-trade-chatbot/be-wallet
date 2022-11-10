@@ -1,0 +1,21 @@
+
+-- +migrate Up
+CREATE TABLE IF NOT EXISTS `be-wallet`.`wallet`
+(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `member_id` BIGINT UNSIGNED NOT NULL COMMENT '會員id',
+    `amount` DECIMAL(19,4) NOT NULL COMMENT '錢包金額',
+    `currency` VARCHAR(36) NOT NULL COMMENT '幣別',
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建日期',
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日期',
+    `deleted_at` TIMESTAMP NULL COMMENT '刪除時間',
+
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX (`member_id`,`currency`)
+) AUTO_INCREMENT=1 CHARSET=`utf8mb4` COLLATE=`utf8mb4_general_ci` COMMENT '錢包';
+
+
+-- +migrate Down
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS `wallet`;
+
