@@ -105,7 +105,11 @@ func (impl *WalletImpl) DeleteWallet(ctx context.Context, in *wallet.DeleteWalle
 func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionReq) (*wallet.TransactionRes, error) {
 
 	db := database.GetDB()
-	amount, _ := decimal.NewFromString(in.Amount)
+	amount, err := decimal.NewFromString(in.Amount)
+	if err != nil {
+		logging.Error(ctx, "[Transaction] failed to cast amount to decimal: %v", err)
+		return nil, err
+	}
 	transactionRecord := &dbModels.TransactionRecordModel{
 		WalletID:    in.WalletID,
 		Action:      dbModels.TransactionAction(in.Action),
@@ -235,7 +239,7 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 	db = db.Commit()
 	db = database.GetDB()
 
-	transactionRecord, err := transactionRecordDao.Get(db, &transactionRecordDao.QueryModel{
+	transactionRecord, err = transactionRecordDao.Get(db, &transactionRecordDao.QueryModel{
 		ID: &transactionRecord.ID,
 	})
 	if err != nil {
