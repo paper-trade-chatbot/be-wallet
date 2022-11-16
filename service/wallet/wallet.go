@@ -233,6 +233,7 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 		return nil, err
 	}
 	db = db.Commit()
+	db = database.GetDB()
 
 	transactionRecord, err := transactionRecordDao.Get(db, &transactionRecordDao.QueryModel{
 		ID: &transactionRecord.ID,

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `be-wallet`.`transaction_record` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
     `member_id` BIGINT UNSIGNED NOT NULL COMMENT '交易者id',
     `wallet_id` BIGINT UNSIGNED NOT NULL COMMENT '錢包id',
-    `action` TINYINT(4) UNSIGNED NOT NULL COMMENT '操作動作',
+    `action` TINYINT(4) UNSIGNED NOT NULL COMMENT '操作動作 1:入金 2:出金 3:贈送 4:利息 5:開倉 6:平倉 7:人工更改',
     `amount` DECIMAL(19,4) NOT NULL COMMENT '金額',
     `before_amount` DECIMAL(19,4) NULL DEFAULT NULL COMMENT '交易前金額',
     `after_amount` DECIMAL(19,4) NULL DEFAULT NULL COMMENT '交易後金額',
