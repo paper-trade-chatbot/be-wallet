@@ -113,7 +113,13 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 		Currency:    in.Currency,
 		CommitterID: in.CommitterID,
 		Status:      dbModels.TransactionStatus_Pending,
-		Remark:      in.Remark,
+	}
+
+	if in.Remark != nil {
+		transactionRecord.Remark = sql.NullString{
+			Valid:  true,
+			String: *in.Remark,
+		}
 	}
 
 	if _, err := transactionRecordDao.New(db, transactionRecord); err != nil {
@@ -369,9 +375,12 @@ func (impl *WalletImpl) GetTransactionRecord(ctx context.Context, in *wallet.Get
 		Currency:    model.Currency,
 		CommitterID: model.CommitterID,
 		Status:      wallet.Status(model.Status),
-		Remark:      model.Remark,
 		CreatedAt:   model.CreatedAt.Unix(),
 		UpdatedAt:   model.UpdatedAt.Unix(),
+	}
+
+	if model.Remark.Valid {
+		transactionRecord.Remark = &model.Remark.String
 	}
 
 	if model.BeforeAmount.Valid {
@@ -456,9 +465,11 @@ func (impl *WalletImpl) GetTransactionRecords(ctx context.Context, in *wallet.Ge
 			Currency:    m.Currency,
 			CommitterID: m.CommitterID,
 			Status:      wallet.Status(m.Status),
-			Remark:      m.Remark,
 			CreatedAt:   m.CreatedAt.Unix(),
 			UpdatedAt:   m.UpdatedAt.Unix(),
+		}
+		if m.Remark.Valid {
+			transactionRecord.Remark = &m.Remark.String
 		}
 		if m.BeforeAmount.Valid {
 			beforeAmount := m.BeforeAmount.Decimal.String()

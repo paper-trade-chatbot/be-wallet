@@ -19,7 +19,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/paper-trade-chatbot/be-common v0.0.0-20221116070833-5d25b364aa36
-	github.com/paper-trade-chatbot/be-proto v0.0.0-20221116064502-2676947927cf
+	github.com/paper-trade-chatbot/be-proto v0.0.0-20221116075433-6d1f3a2dbe1d
 	github.com/shopspring/decimal v1.3.1
 	github.com/tinylib/msgp v1.1.6
 	golang.org/x/net v0.0.0-20221014081412-f15817d10f9b

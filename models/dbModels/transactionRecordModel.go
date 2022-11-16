@@ -41,7 +41,7 @@ type TransactionRecordModel struct {
 	Currency             string              `gorm:"column:currency"`
 	CommitterID          uint64              `gorm:"column:committer_id"`
 	Status               TransactionStatus   `gorm:"column:status"`
-	Remark               string              `gorm:"column:remark"`
+	Remark               sql.NullString      `gorm:"column:remark"`
 	CreatedAt            time.Time           `gorm:"column:created_at"`
 	UpdatedAt            time.Time           `gorm:"column:updated_at"`
 	RollbackBeforeAmount decimal.NullDecimal `gorm:"column:rollback_before_amount"`
