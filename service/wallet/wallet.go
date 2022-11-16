@@ -125,6 +125,7 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 			String: *in.Remark,
 		}
 	}
+	logging.Info(ctx, "[Transaction] %#v", transactionRecord)
 
 	if _, err := transactionRecordDao.New(db, transactionRecord); err != nil {
 		logging.Error(ctx, "[Transaction] failed to new transaction record: %v", err)
@@ -182,21 +183,7 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 		}
 
 		beforeAmount.Decimal = walletModel.Amount
-		afterAmount.Decimal = walletModel.Amount.Copy()
-		transactionAmount, err := decimal.NewFromString(in.Amount)
-		if err != nil {
-			logging.Error(ctx, "[Transaction] failed to cast amount to decimal: %v", err)
-
-			db = db.Rollback()
-			status := dbModels.TransactionStatus_Failed
-			if err := transactionRecordDao.Modify(db, transactionRecord, &transactionRecordDao.UpdateModel{
-				Status: &status,
-			}); err != nil {
-				logging.Error(ctx, "[Transaction] failed to modify transaction record: %v", err)
-			}
-			return nil, common.ErrInvalidParam
-		}
-		afterAmount.Decimal.Add(transactionAmount)
+		afterAmount.Decimal = walletModel.Amount.Copy().Add(amount)
 		update := &walletDao.UpdateModel{
 			Amount: &afterAmount.Decimal,
 		}
