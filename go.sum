@@ -527,6 +527,8 @@ github.com/paper-trade-chatbot/be-common v0.0.0-20221110054037-bfc698ef4bb8 h1:Z
 github.com/paper-trade-chatbot/be-common v0.0.0-20221110054037-bfc698ef4bb8/go.mod h1:vTto5AdwqXszPISNTAtHjWHl48Fkr0XPh7LVxnMfNbQ=
 github.com/paper-trade-chatbot/be-common v0.0.0-20221110094328-13b26d24aeb7 h1:bVNVY9sVpy4f3/sL7loz3+rx4xHVL6uHShzFR7kR/gQ=
 github.com/paper-trade-chatbot/be-common v0.0.0-20221110094328-13b26d24aeb7/go.mod h1:vTto5AdwqXszPISNTAtHjWHl48Fkr0XPh7LVxnMfNbQ=
+github.com/paper-trade-chatbot/be-common v0.0.0-20221116070833-5d25b364aa36 h1:ZlVXi5WYxOgL7bzs5mpWoKhOh+4g26IpbtcvoRYdYoQ=
+github.com/paper-trade-chatbot/be-common v0.0.0-20221116070833-5d25b364aa36/go.mod h1:vTto5AdwqXszPISNTAtHjWHl48Fkr0XPh7LVxnMfNbQ=
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221109083230-88a8eb67e883 h1:JTBhPqo1mQqTkl1xNxTF02f7O6OO9Ok80n7h2BjeB3g=
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221109083230-88a8eb67e883/go.mod h1:EF2NN7p3eYKdCjTNBEpPue9l6lnLS5hrBYEUYUhnn5Q=
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221110025123-88b5029211b0 h1:bPhse1n4ksRGsGl05LYweFoNta8vyuPuMmrc5ywh4hk=
@@ -539,6 +541,8 @@ github.com/paper-trade-chatbot/be-proto v0.0.0-20221110081216-acda2feccf51 h1:Ix
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221110081216-acda2feccf51/go.mod h1:EF2NN7p3eYKdCjTNBEpPue9l6lnLS5hrBYEUYUhnn5Q=
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221110093632-58cb30d7e186 h1:ARhkJsTFharGA38t8d4Ed69BnIryWOMsBb5+0Q6txDs=
 github.com/paper-trade-chatbot/be-proto v0.0.0-20221110093632-58cb30d7e186/go.mod h1:EF2NN7p3eYKdCjTNBEpPue9l6lnLS5hrBYEUYUhnn5Q=
+github.com/paper-trade-chatbot/be-proto v0.0.0-20221116064502-2676947927cf h1:L4+gy0vjVYYor6H43RuoHSli06fzqoC5triFJBny70s=
+github.com/paper-trade-chatbot/be-proto v0.0.0-20221116064502-2676947927cf/go.mod h1:EF2NN7p3eYKdCjTNBEpPue9l6lnLS5hrBYEUYUhnn5Q=
 github.com/pelletier/go-toml/v2 v2.0.1 h1:8e3L2cCQzLFi2CR4g7vGFuFxX7Jl1kKX8gW+iV0GUKU=
 github.com/pelletier/go-toml/v2 v2.0.1/go.mod h1:r9LEWfGN8R5k0VXJ+0BkIe7MYkRdwZOjgMj2KwnJFUo=
 github.com/philhofer/fwd v1.1.1 h1:GdGcTjf5RNAxwS4QLsiMzJYj5KEvPJD3Abr261yRQXQ=
@@ -1112,6 +1116,8 @@ google.golang.org/genproto v0.0.0-20221010155953-15ba04fc1c0e/go.mod h1:3526vdqw
 google.golang.org/genproto v0.0.0-20221014213838-99cd37c6964a/go.mod h1:1vXfmgAz9N9Jx0QA82PqRVauvCz1SGSz739p0f183jM=
 google.golang.org/genproto v0.0.0-20221109142239-94d6d90a7d66 h1:wx7sJ5GRBQLRcslTNcrTklsHhHevQvxgztW18txbbZM=
 google.golang.org/genproto v0.0.0-20221109142239-94d6d90a7d66/go.mod h1:rZS5c/ZVYMaOGBfO68GWtjOw/eLaZM1X6iVtgjZ+EWg=
+google.golang.org/genproto v0.0.0-20221114212237-e4508ebdbee1 h1:jCw9YRd2s40X9Vxi4zKsPRvSPlHWNqadVkpbMsCPzPQ=
+google.golang.org/genproto v0.0.0-20221114212237-e4508ebdbee1/go.mod h1:rZS5c/ZVYMaOGBfO68GWtjOw/eLaZM1X6iVtgjZ+EWg=
 google.golang.org/grpc v1.19.0/go.mod h1:mqu4LbDTu4XGKhr4mRzUsmM4RtVoemTSY81AxZiDr8c=
 google.golang.org/grpc v1.20.1/go.mod h1:10oTOabMzJvdu6/UiuZezV6QK5dSlG84ov/aaiqXj38=
 google.golang.org/grpc v1.21.1/go.mod h1:oYelfM1adQP15Ek0mdvEgi9Df8B9CZIaU1084ijfRaM=

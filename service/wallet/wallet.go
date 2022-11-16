@@ -179,6 +179,10 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 			Amount: &afterAmount.Decimal,
 		}
 
+		if afterAmount.Decimal.LessThan(decimal.Zero) {
+			return nil, common.ErrInsufficientBalance
+		}
+
 		err = walletDao.Modify(db, walletModel, update)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			logging.Debug(ctx, "[Transaction] wallet been modified when updating %d: %v", in.WalletID, err)
