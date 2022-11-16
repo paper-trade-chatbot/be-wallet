@@ -110,7 +110,17 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 		logging.Error(ctx, "[Transaction] failed to cast amount to decimal: %v", err)
 		return nil, err
 	}
+
+	walletModel, err := walletDao.Get(db, &walletDao.QueryModel{
+		ID: []uint64{in.WalletID},
+	})
+	if err != nil {
+		logging.Error(ctx, "[Transaction] failed to get wallet %d: %v", in.WalletID, err)
+		return nil, err
+	}
+
 	transactionRecord := &dbModels.TransactionRecordModel{
+		MemberID:    walletModel.MemberID,
 		WalletID:    in.WalletID,
 		Action:      dbModels.TransactionAction(in.Action),
 		Amount:      amount,
