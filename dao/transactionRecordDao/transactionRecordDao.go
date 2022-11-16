@@ -180,7 +180,7 @@ func Modify(tx *gorm.DB, model *dbModels.TransactionRecordModel, update *UpdateM
 	}
 
 	err := tx.Table(table).
-		Model(dbModels.WalletModel{}).
+		Model(dbModels.TransactionRecordModel{}).
 		Where(table+".id = ? AND "+table+".status = ?", model.ID, model.Status).
 		Updates(attrs).Error
 
