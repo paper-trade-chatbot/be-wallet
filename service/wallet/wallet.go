@@ -135,7 +135,6 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 			String: *in.Remark,
 		}
 	}
-	logging.Info(ctx, "[Transaction] %#v", transactionRecord)
 
 	if _, err := transactionRecordDao.New(db, transactionRecord); err != nil {
 		logging.Error(ctx, "[Transaction] failed to new transaction record: %v", err)
@@ -147,6 +146,73 @@ func (impl *WalletImpl) Transaction(ctx context.Context, in *wallet.TransactionR
 
 	beforeAmount := decimal.NewNullDecimal(decimal.Zero)
 	afterAmount := decimal.NewNullDecimal(decimal.Zero)
+
+	if in.BeforeAmount != nil {
+		func() (*wallet.TransactionRes, error) {
+			success := false
+			tx := db.Begin()
+			defer func() {
+				if !success {
+					tx.Rollback()
+					status := dbModels.TransactionStatus_Failed
+					if err := transactionRecordDao.Modify(db, transactionRecord, &transactionRecordDao.UpdateModel{
+						Status: &status,
+					}); err != nil {
+						logging.Error(ctx, "[Transaction] failed to modify transaction record: %v", err)
+					}
+				}
+			}()
+			beforeAmount.Decimal, _ = decimal.NewFromString(*in.BeforeAmount)
+			afterAmount.Decimal = beforeAmount.Decimal.Copy().Add(amount)
+			update := &walletDao.UpdateModel{
+				Amount: &afterAmount.Decimal,
+			}
+			if afterAmount.Decimal.LessThan(decimal.Zero) {
+				return nil, common.ErrInsufficientBalance
+			}
+			walletModel.Amount = beforeAmount.Decimal
+
+			err = walletDao.Modify(tx, walletModel, update)
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				logging.Error(ctx, "[Transaction] wallet been modified when updating %d: %v", in.WalletID, err)
+				return nil, err
+			}
+			if err != nil {
+				logging.Error(ctx, "[Transaction] wallet [%d] Modify failed: %v", in.WalletID, err)
+				return nil, err
+			}
+
+			status := dbModels.TransactionStatus_Success
+			if err := transactionRecordDao.Modify(tx, transactionRecord, &transactionRecordDao.UpdateModel{
+				BeforeAmount: &beforeAmount,
+				AfterAmount:  &afterAmount,
+				Status:       &status,
+			}); err != nil {
+				logging.Error(ctx, "[Transaction] failed to modify transaction record: %v", err)
+				return nil, err
+			}
+			tx.Commit()
+			success = true
+
+			transactionRecord, err = transactionRecordDao.Get(db, &transactionRecordDao.QueryModel{
+				ID: &transactionRecord.ID,
+			})
+			if err != nil {
+				logging.Error(ctx, "[Transaction] failed to get modified transaction record: %v", err)
+				return nil, err
+			}
+
+			return &wallet.TransactionRes{
+				Id:           transactionRecord.ID,
+				BeforeAmount: beforeAmount.Decimal.String(),
+				AfterAmount:  afterAmount.Decimal.String(),
+				Currency:     in.Currency,
+				Status:       wallet.Status(dbModels.TransactionStatus_Success),
+				CreatedAt:    transactionRecord.CreatedAt.Unix(),
+				UpdatedAt:    transactionRecord.UpdatedAt.Unix(),
+			}, nil
+		}()
+	}
 
 	db = db.Begin()
 	for !success {
