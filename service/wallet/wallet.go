@@ -7,11 +7,11 @@ import (
 	"time"
 
 	common "github.com/paper-trade-chatbot/be-common"
+	"github.com/paper-trade-chatbot/be-common/database"
+	"github.com/paper-trade-chatbot/be-common/logging"
 	"github.com/paper-trade-chatbot/be-proto/wallet"
 	"github.com/paper-trade-chatbot/be-wallet/dao/transactionRecordDao"
 	"github.com/paper-trade-chatbot/be-wallet/dao/walletDao"
-	"github.com/paper-trade-chatbot/be-wallet/database"
-	"github.com/paper-trade-chatbot/be-wallet/logging"
 	"github.com/paper-trade-chatbot/be-wallet/models/dbModels"
 	"github.com/shopspring/decimal"
 	"gorm.io/gorm"

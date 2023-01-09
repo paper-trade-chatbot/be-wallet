@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"runtime/debug"
 
+	"github.com/paper-trade-chatbot/be-common/cache"
+	"github.com/paper-trade-chatbot/be-common/database"
 	walletGrpc "github.com/paper-trade-chatbot/be-proto/wallet"
-	"github.com/paper-trade-chatbot/be-wallet/cache"
 	"github.com/paper-trade-chatbot/be-wallet/cronjob"
-	"github.com/paper-trade-chatbot/be-wallet/database"
 	"github.com/paper-trade-chatbot/be-wallet/service"
 	"github.com/paper-trade-chatbot/be-wallet/service/wallet"
 
@@ -19,10 +19,10 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 
-	"github.com/paper-trade-chatbot/be-wallet/config"
-	"github.com/paper-trade-chatbot/be-wallet/global"
-	"github.com/paper-trade-chatbot/be-wallet/logging"
-	"github.com/paper-trade-chatbot/be-wallet/server"
+	"github.com/paper-trade-chatbot/be-common/config"
+	"github.com/paper-trade-chatbot/be-common/global"
+	"github.com/paper-trade-chatbot/be-common/logging"
+	"github.com/paper-trade-chatbot/be-common/server"
 )
 
 func main() {
